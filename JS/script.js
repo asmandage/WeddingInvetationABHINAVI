@@ -2,6 +2,7 @@
 // PAGE LOADER FUNCTIONALITY
 // ============================================
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize all features
     initLoader();
     initLanguage();
     initCountdown();
@@ -13,27 +14,37 @@ document.addEventListener('DOMContentLoaded', function() {
     initImageLoadEffects();
     initParallaxEffect();
     initHoverEffects();
+    addCSSAnimation();
 });
 
-// Loader remains the same as before...
 function initLoader() {
     const loader = document.getElementById('page-loader');
     const mainContent = document.getElementById('main-content');
     const progressBar = document.querySelector('.progress-bar');
+    const langButtons = document.querySelectorAll('.lang-btn');
     
+    // Simulate progress for better UX
     let progress = 0;
     const progressInterval = setInterval(() => {
         progress += Math.random() * 15;
-        if (progress > 90) progress = 90;
+        if (progress > 90) {
+            progress = 90;
+        }
         progressBar.style.width = `${progress}%`;
     }, 200);
 
+    // Handle page load
     window.addEventListener('load', function() {
+        // Complete progress bar
         clearInterval(progressInterval);
         progressBar.style.width = '100%';
         
+        // Add a small delay for smooth transition
         setTimeout(() => {
+            // Hide loader
             loader.classList.add('fade-out');
+            
+            // Show main content
             mainContent.classList.add('loaded');
             
             // Start staggered animations after loader
@@ -42,10 +53,33 @@ function initLoader() {
                 addRSVPpulse();
             }, 500);
             
+            // Remove loader from DOM after animation
             setTimeout(() => {
                 loader.style.display = 'none';
             }, 500);
+            
         }, 300);
+    });
+
+    // Handle language toggle for loader text
+    function updateLoaderText(lang) {
+        const loaderTexts = document.querySelectorAll('.loader-text span');
+        loaderTexts.forEach(text => {
+            text.classList.toggle('active', text.classList.contains('lang-content') && 
+                text.dataset.lang === lang);
+        });
+    }
+
+    // Initialize loader text language
+    let currentLang = localStorage.getItem('weddingLang') || 'en';
+    updateLoaderText(currentLang);
+    
+    // Update loader text when language changes
+    langButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const lang = btn.dataset.lang;
+            updateLoaderText(lang);
+        });
     });
 }
 
@@ -106,24 +140,23 @@ function initSmoothScrolling() {
 // SCROLL INDICATOR
 // ============================================
 function initScrollIndicator() {
-    // Create scroll indicator dots
-    const sections = ['home', 'family-section', 'countdown-section', 'venue', 'story', 'gallery', 'rsvp'];
-    const indicator = document.createElement('div');
-    indicator.className = 'scroll-indicator';
-    
-    sections.forEach(section => {
-        const dot = document.createElement('div');
-        dot.className = 'scroll-dot';
-        dot.dataset.section = section;
-        dot.addEventListener('click', () => {
-            document.getElementById(section).scrollIntoView({
-                behavior: 'smooth'
+    // Create scroll indicator dots if not already in HTML
+    if (!document.querySelector('.scroll-indicator .scroll-dot')) {
+        const sections = ['home', 'family-section', 'countdown-section', 'venue', 'story', 'gallery', 'rsvp'];
+        const indicator = document.querySelector('.scroll-indicator');
+        
+        sections.forEach(section => {
+            const dot = document.createElement('div');
+            dot.className = 'scroll-dot';
+            dot.dataset.section = section;
+            dot.addEventListener('click', () => {
+                document.getElementById(section).scrollIntoView({
+                    behavior: 'smooth'
+                });
             });
+            indicator.appendChild(dot);
         });
-        indicator.appendChild(dot);
-    });
-    
-    document.body.appendChild(indicator);
+    }
     
     // Update active dot on scroll
     window.addEventListener('scroll', updateScrollIndicator);
@@ -207,6 +240,14 @@ function initStaggeredAnimations() {
             num.style.opacity = '1';
             num.style.transform = 'translateY(0)';
         }, 300 + (index * 100));
+    });
+    
+    // Animate sections
+    const sections = document.querySelectorAll('section');
+    sections.forEach((section, index) => {
+        setTimeout(() => {
+            section.classList.add('visible');
+        }, 500 + (index * 200));
     });
 }
 
@@ -317,7 +358,12 @@ function initCountdown() {
         updateWithAnimation(secondsEl, seconds.toString().padStart(2, '0'), oldValues.seconds);
         
         // Store new values
-        oldValues = { days, hours, minutes, seconds };
+        oldValues = { 
+            days: days.toString().padStart(2, '0'), 
+            hours: hours.toString().padStart(2, '0'), 
+            minutes: minutes.toString().padStart(2, '0'), 
+            seconds: seconds.toString().padStart(2, '0') 
+        };
     }
     
     function updateWithAnimation(element, newValue, oldValue) {
@@ -447,7 +493,11 @@ function addRSVPpulse() {
 // ADD CELEBRATION ANIMATION
 // ============================================
 function addCSSAnimation() {
+    // Check if style already exists
+    if (document.getElementById('celebration-animations')) return;
+    
     const style = document.createElement('style');
+    style.id = 'celebration-animations';
     style.textContent = `
         @keyframes celebrate {
             0% { transform: scale(0.5); opacity: 0; }
@@ -467,5 +517,23 @@ function addCSSAnimation() {
     document.head.appendChild(style);
 }
 
-// Initialize celebration animation
-addCSSAnimation();
+// ============================================
+// LAZY LOAD IMAGES
+// ============================================
+if ('IntersectionObserver' in window) {
+    const imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                if (img.dataset.src) {
+                    img.src = img.dataset.src;
+                }
+                imageObserver.unobserve(img);
+            }
+        });
+    });
+    
+    document.querySelectorAll('img[data-src]').forEach(img => {
+        imageObserver.observe(img);
+    });
+}
