@@ -3,17 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wedding Invitation | Abhishek & Vaishnavi</title>
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>Abhishek & Vaishnavi | Wedding Invitation</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="./css/style.css">
     
-    <!-- Loader CSS -->
+    <!-- Styles -->
+    <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/loader.css">
+    <link rel="stylesheet" href="./css/animations.css">
 </head>
 
 <body>
@@ -22,382 +23,605 @@
         ============================================ -->
     <div id="page-loader" class="page-loader">
         <div class="loader-container">
-            <!-- Heart Pulse Animation -->
-            <div class="heart-loader">
-                <div class="heart-pulse"></div>
-                <div class="heart-pulse heart-pulse-2"></div>
-                <div class="heart-pulse heart-pulse-3"></div>
-                <div class="heart-core">
+            <div class="ring-loader">
+                <div class="ring"></div>
+                <div class="ring"></div>
+                <div class="ring"></div>
+                <div class="ring"></div>
+                <div class="heart-center">
                     <i class="fas fa-heart"></i>
                 </div>
             </div>
             
-            <!-- Loading Text -->
             <div class="loader-text">
-                <span class="lang-content active" data-lang="en">Loading Our Special Day...</span>
-                <span class="lang-content" data-lang="mr">आमचा विशेष दिवस लोड होत आहे...</span>
+                <span class="lang-content active" data-lang="en">Our Journey Begins...</span>
+                <span class="lang-content" data-lang="mr">आमची सफर सुरू होते...</span>
             </div>
             
-            <!-- Progress Bar -->
-            <div class="loader-progress">
-                <div class="progress-bar"></div>
+            <div class="floating-hearts">
+                <div class="heart-float"><i class="fas fa-heart"></i></div>
+                <div class="heart-float"><i class="fas fa-heart"></i></div>
+                <div class="heart-float"><i class="fas fa-heart"></i></div>
+                <div class="heart-float"><i class="fas fa-heart"></i></div>
             </div>
         </div>
     </div>
 
-    <!-- Main Content -->
+    <!-- ============================================
+           MAIN CONTENT
+        ============================================ -->
     <div id="main-content" class="main-content">
-        <!-- Scroll Indicator -->
-        <div class="scroll-indicator">
-            <div class="scroll-dot" data-section="home"></div>
-            <div class="scroll-dot" data-section="family-section"></div>
-            <div class="scroll-dot" data-section="countdown-section"></div>
-            <div class="scroll-dot" data-section="venue"></div>
-            <div class="scroll-dot" data-section="story"></div>
-            <div class="scroll-dot" data-section="gallery"></div>
-            <div class="scroll-dot" data-section="rsvp"></div>
+        <!-- Scroll Progress -->
+        <div class="scroll-progress">
+            <div class="progress-bar"></div>
         </div>
 
-        <!-- Language Toggle -->
-        <div class="language-toggle">
-            <button class="lang-btn active" data-lang="en">English</button>
-            <button class="lang-btn" data-lang="mr">मराठी</button>
-        </div>
-
-        <!-- Scroll to Top Button -->
-        <button class="scroll-top" id="scrollTop">
-            ↑
-        </button>
-
-        <!-- HERO SECTION -->
-        <section class="hero" id="home">
-            <div class="hero-content gradient-border fade-in">
-                <!-- English Content -->
-                <div class="lang-content active" data-lang="en">
-                    <h1 class="names-font gradient-text">Abhishek & Vaishnavi</h1>
-                    <p class="hero-tagline">Are Getting Married</p>
-                    <p class="hero-date">10 February 2026</p>
-                    <p class="hero-venue">Jaiswal Lawns, Muktainagar</p>
+        <!-- Navigation -->
+        <nav class="main-nav">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <span class="logo-text">A&V</span>
+                    <div class="logo-heart"><i class="fas fa-heart"></i></div>
                 </div>
                 
-                <!-- Marathi Content -->
-                <div class="lang-content" data-lang="mr">
-                    <h1 class="names-font gradient-text">अभिषेक आणि वैष्णवी</h1>
-                    <p class="hero-tagline">विवाहबद्ध होत आहेत</p>
-                    <p class="hero-date">१० फेब्रुवारी २०२६</p>
-                    <p class="hero-venue">जैसवाल लॉन, मुक्ताईनगर</p>
+                <div class="nav-links">
+                    <a href="#home" class="nav-link active" data-section="home">
+                        <span class="nav-icon"><i class="fas fa-home"></i></span>
+                        <span class="nav-text">Home</span>
+                    </a>
+                    <a href="#family" class="nav-link" data-section="family">
+                        <span class="nav-icon"><i class="fas fa-users"></i></span>
+                        <span class="nav-text">Family</span>
+                    </a>
+                    <a href="#countdown" class="nav-link" data-section="countdown">
+                        <span class="nav-icon"><i class="fas fa-clock"></i></span>
+                        <span class="nav-text">Countdown</span>
+                    </a>
+                    <a href="#venue" class="nav-link" data-section="venue">
+                        <span class="nav-icon"><i class="fas fa-map-marker-alt"></i></span>
+                        <span class="nav-text">Venue</span>
+                    </a>
+                    <a href="#story" class="nav-link" data-section="story">
+                        <span class="nav-icon"><i class="fas fa-book-open"></i></span>
+                        <span class="nav-text">Story</span>
+                    </a>
+                    <a href="#gallery" class="nav-link" data-section="gallery">
+                        <span class="nav-icon"><i class="fas fa-images"></i></span>
+                        <span class="nav-text">Gallery</span>
+                    </a>
+                    <a href="#rsvp" class="nav-link" data-section="rsvp">
+                        <span class="nav-icon"><i class="fas fa-envelope"></i></span>
+                        <span class="nav-text">RSVP</span>
+                    </a>
+                </div>
+                
+                <div class="nav-actions">
+                    <div class="language-switcher">
+                        <button class="lang-btn active" data-lang="en">EN</button>
+                        <button class="lang-btn" data-lang="mr">मर</button>
+                    </div>
+                    <button class="menu-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
                 </div>
             </div>
-            <div class="scroll-down" onclick="document.getElementById('family-section').scrollIntoView({behavior: 'smooth'})">
-                ↓
+        </nav>
+
+        <!-- HERO SECTION -->
+        <section class="hero-section" id="home">
+            <div class="hero-overlay"></div>
+            <div class="hero-floating-elements">
+                <div class="floating-element"></div>
+                <div class="floating-element"></div>
+                <div class="floating-element"></div>
+            </div>
+            
+            <div class="hero-content">
+                <div class="hero-text-wrapper">
+                    <div class="hero-pre-title animate-text">
+                        <span class="lang-content active" data-lang="en">The Wedding of</span>
+                        <span class="lang-content" data-lang="mr">च्या विवाहाचा समारंभ</span>
+                    </div>
+                    
+                    <h1 class="hero-title animate-text">
+                        <span class="name-part first-name">Abhishek</span>
+                        <span class="ampersand">&</span>
+                        <span class="name-part second-name">Vaishnavi</span>
+                    </h1>
+                    
+                    <div class="hero-date animate-text">
+                        <div class="date-item">
+                            <span class="date-number">10</span>
+                            <span class="date-label">
+                                <span class="lang-content active" data-lang="en">February</span>
+                                <span class="lang-content" data-lang="mr">फेब्रुवारी</span>
+                            </span>
+                        </div>
+                        <div class="date-item">
+                            <span class="date-number">2026</span>
+                            <span class="date-label">
+                                <span class="lang-content active" data-lang="en">Year</span>
+                                <span class="lang-content" data-lang="mr">वर्ष</span>
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="hero-subtitle animate-text">
+                        <span class="lang-content active" data-lang="en">Join us in celebrating our eternal love</span>
+                        <span class="lang-content" data-lang="mr">आमच्या शाश्वत प्रेमाच्या उत्सवात सहभागी व्हा</span>
+                    </div>
+                </div>
+                
+                <div class="hero-scroll-indicator">
+                    <div class="scroll-line"></div>
+                    <span class="scroll-text">
+                        <span class="lang-content active" data-lang="en">Scroll to explore</span>
+                        <span class="lang-content" data-lang="mr">शोधण्यासाठी स्क्रोल करा</span>
+                    </span>
+                </div>
             </div>
         </section>
 
         <!-- FAMILY SECTION -->
-        <section class="family" id="family-section">
-            <div class="container">
-                <div class="section-title fade-in-up">
-                    <!-- English Content -->
-                    <div class="lang-content active" data-lang="en">
-                        <h2>Our Families</h2>
-                        <p>Blessings and Love From Our Families</p>
+        <section class="family-section" id="family">
+            <div class="section-container">
+                <div class="section-header">
+                    <div class="section-pre-title animate-text">
+                        <span class="lang-content active" data-lang="en">Blessed By</span>
+                        <span class="lang-content" data-lang="mr">आशीर्वादित</span>
                     </div>
-                    
-                    <!-- Marathi Content -->
-                    <div class="lang-content" data-lang="mr">
-                        <h2>आमची कुटुंबे</h2>
-                        <p>आमच्या कुटुंबांचे आशीर्वाद आणि प्रेम</p>
+                    <h2 class="section-title animate-text">
+                        <span class="lang-content active" data-lang="en">Our Families</span>
+                        <span class="lang-content" data-lang="mr">आमची कुटुंबे</span>
+                    </h2>
+                    <div class="section-subtitle animate-text">
+                        <span class="lang-content active" data-lang="en">The pillars of our love story</span>
+                        <span class="lang-content" data-lang="mr">आमच्या प्रेमकथेचे आधारस्तंभ</span>
                     </div>
                 </div>
                 
-                <div class="family-content fade-in-up">
-                    <!-- Family Photo -->
-                    <div class="family-photo-container">
-                        <img src="./Image/familyBackground.jpg" 
-                             alt="Our Family Together" 
-                             class="family-photo"
-                             onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'">
-                        <div class="family-overlay">
-                            <!-- English Content -->
-                            <div class="lang-content active" data-lang="en">
-                                <h3>Blessed By Family Love</h3>
-                                <p>Our families, our strength, our blessings</p>
+                <div class="family-grid">
+                    <div class="family-card groom-family animate-card">
+                        <div class="family-card-inner">
+                            <div class="family-icon">
+                                <i class="fas fa-user-tie"></i>
                             </div>
-                            
-                            <!-- Marathi Content -->
-                            <div class="lang-content" data-lang="mr">
-                                <h3>कुटुंब प्रेमाने आशीर्वादित</h3>
-                                <p>आमची कुटुंबे, आमची शक्ती, आमचे आशीर्वाद</p>
-                            </div>
+                            <h3 class="family-name">
+                                <span class="lang-content active" data-lang="en">Groom's Family</span>
+                                <span class="lang-content" data-lang="mr">वराचे कुटुंब</span>
+                            </h3>
+                            <p class="family-desc">
+                                <span class="lang-content active" data-lang="en">With endless love and blessings</span>
+                                <span class="lang-content" data-lang="mr">अखंड प्रेम आणि आशीर्वादांसह</span>
+                            </p>
                         </div>
                     </div>
                     
-                    <!-- Family Description -->
-                    <div class="family-description fade-in-up">
-                        <!-- English Content -->
-                        <div class="lang-content active" data-lang="en">
-                            <p>We are blessed to have the unconditional love and support of our wonderful families. 
-                            Their guidance, blessings, and endless love have shaped us into who we are today.</p>
-                            <p style="margin-top: 15px;">Together, our families welcome you to share in our joy as we begin this new chapter of our lives.</p>
-                        </div>
-                        
-                        <!-- Marathi Content -->
-                        <div class="lang-content" data-lang="mr">
-                            <p>आमच्या अद्भुत कुटुंबांचे निःस्वार्थ प्रेम आणि समर्थन आम्हाला मिळाल्याबद्दल आम्ही आशीर्वादित आहोत. 
-                            त्यांचे मार्गदर्शन, आशीर्वाद आणि अखंड प्रेमाने आम्हाला आजच्या स्वरूपात आणले आहे.</p>
-                            <p style="margin-top: 15px;">एकत्रितपणे, आमची कुटुंबे आपल्या आयुष्याचा हा नवीन अध्याय सुरू करताना आपल्या आनंदात सहभागी होण्यासाठी आपले स्वागत करतात.</p>
+                    <div class="family-card bride-family animate-card">
+                        <div class="family-card-inner">
+                            <div class="family-icon">
+                                <i class="fas fa-user-bride"></i>
+                            </div>
+                            <h3 class="family-name">
+                                <span class="lang-content active" data-lang="en">Bride's Family</span>
+                                <span class="lang-content" data-lang="mr">वधूचे कुटुंब</span>
+                            </h3>
+                            <p class="family-desc">
+                                <span class="lang-content active" data-lang="en">With prayers and warm wishes</span>
+                                <span class="lang-content" data-lang="mr">प्रार्थना आणि उबदार शुभेच्छांसह</span>
+                            </p>
                         </div>
                     </div>
+                </div>
+                
+                <div class="family-quote animate-text">
+                    <i class="fas fa-quote-left quote-icon"></i>
+                    <p class="quote-text">
+                        <span class="lang-content active" data-lang="en">"Family is where life begins and love never ends"</span>
+                        <span class="lang-content" data-lang="mr">"कुटुंब हेच जीवनाची सुरुवात आहे आणि प्रेम कधीही संपत नाही"</span>
+                    </p>
+                    <i class="fas fa-quote-right quote-icon"></i>
                 </div>
             </div>
         </section>
 
         <!-- COUNTDOWN SECTION -->
-        <section class="countdown" id="countdown-section">
-            <div class="container">
-                <div class="section-title fade-in-up">
-                    <!-- English Content -->
-                    <div class="lang-content active" data-lang="en">
-                        <h2>Countdown</h2>
-                        <p>The wait is almost over!</p>
+        <section class="countdown-section" id="countdown">
+            <div class="section-container">
+                <div class="countdown-header">
+                    <div class="countdown-pre-title animate-text">
+                        <span class="lang-content active" data-lang="en">Counting the Moments</span>
+                        <span class="lang-content" data-lang="mr">क्षणांची गणना</span>
                     </div>
-                    
-                    <!-- Marathi Content -->
-                    <div class="lang-content" data-lang="mr">
-                        <h2>उलट मोजणी</h2>
-                        <p>प्रतीक्षा जवळजवळ संपली!</p>
+                    <h2 class="countdown-title animate-text">
+                        <span class="lang-content active" data-lang="en">Days Until Forever</span>
+                        <span class="lang-content" data-lang="mr">कायमच्यापर्यंतचे दिवस</span>
+                    </h2>
+                </div>
+                
+                <div class="countdown-timer animate-card">
+                    <div class="timer-grid">
+                        <div class="timer-unit">
+                            <div class="unit-value" id="days">00</div>
+                            <div class="unit-label">
+                                <span class="lang-content active" data-lang="en">Days</span>
+                                <span class="lang-content" data-lang="mr">दिवस</span>
+                            </div>
+                        </div>
+                        <div class="timer-separator">:</div>
+                        <div class="timer-unit">
+                            <div class="unit-value" id="hours">00</div>
+                            <div class="unit-label">
+                                <span class="lang-content active" data-lang="en">Hours</span>
+                                <span class="lang-content" data-lang="mr">तास</span>
+                            </div>
+                        </div>
+                        <div class="timer-separator">:</div>
+                        <div class="timer-unit">
+                            <div class="unit-value" id="minutes">00</div>
+                            <div class="unit-label">
+                                <span class="lang-content active" data-lang="en">Minutes</span>
+                                <span class="lang-content" data-lang="mr">मिनिटे</span>
+                            </div>
+                        </div>
+                        <div class="timer-separator">:</div>
+                        <div class="timer-unit">
+                            <div class="unit-value" id="seconds">00</div>
+                            <div class="unit-label">
+                                <span class="lang-content active" data-lang="en">Seconds</span>
+                                <span class="lang-content" data-lang="mr">सेकंद</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="countdown-container fade-in-up">
-                    <div id="countdown">
-                        <div class="countdown-item">
-                            <span class="countdown-number" id="days">00</span>
-                            <span class="countdown-label">Days</span>
-                        </div>
-                        <div class="countdown-item">
-                            <span class="countdown-number" id="hours">00</span>
-                            <span class="countdown-label">Hours</span>
-                        </div>
-                        <div class="countdown-item">
-                            <span class="countdown-number" id="minutes">00</span>
-                            <span class="countdown-label">Minutes</span>
-                        </div>
-                        <div class="countdown-item">
-                            <span class="countdown-number" id="seconds">00</span>
-                            <span class="countdown-label">Seconds</span>
-                        </div>
-                    </div>
+                
+                <div class="countdown-note animate-text">
+                    <p>
+                        <span class="lang-content active" data-lang="en">The moment we've been waiting for is almost here!</span>
+                        <span class="lang-content" data-lang="mr">ज्या क्षणाची आम्ही वाट पाहत होतो तो क्षण जवळ आला आहे!</span>
+                    </p>
                 </div>
+            </div>
+            
+            <div class="countdown-floating">
+                <div class="floating-ring"></div>
+                <div class="floating-ring"></div>
+                <div class="floating-ring"></div>
             </div>
         </section>
 
         <!-- VENUE SECTION -->
-        <section class="venue" id="venue">
-            <div class="container">
-                <div class="section-title fade-in-up">
-                    <!-- English Content -->
-                    <div class="lang-content active" data-lang="en">
-                        <h2>Venue</h2>
-                        <p>Where dreams come true</p>
+        <section class="venue-section" id="venue">
+            <div class="section-container">
+                <div class="venue-header">
+                    <div class="section-pre-title animate-text">
+                        <span class="lang-content active" data-lang="en">The Celebration</span>
+                        <span class="lang-content" data-lang="mr">उत्सव</span>
                     </div>
-                    
-                    <!-- Marathi Content -->
-                    <div class="lang-content" data-lang="mr">
-                        <h2>ठिकाण</h2>
-                        <p>जिथे स्वप्ने साकार होतात</p>
-                    </div>
+                    <h2 class="section-title animate-text">
+                        <span class="lang-content active" data-lang="en">Wedding Venue</span>
+                        <span class="lang-content" data-lang="mr">विवाहाचे ठिकाण</span>
+                    </h2>
                 </div>
+                
                 <div class="venue-content">
-                    <div class="venue-info fade-in-up">
-                        <!-- English Content -->
-                        <div class="lang-content active" data-lang="en">
+                    <div class="venue-info animate-card">
+                        <div class="venue-details">
+                            <div class="venue-icon">
+                                <i class="fas fa-map-pin"></i>
+                            </div>
                             <h3 class="venue-name">Jaiswal Lawns</h3>
                             <p class="venue-address">Salbardi Rd, Muktainagar, Maharashtra 425306</p>
-                            <p>We joyfully invite you to join us as we celebrate our special day.</p>
-                        </div>
-                        
-                        <!-- Marathi Content -->
-                        <div class="lang-content" data-lang="mr">
-                            <h3 class="venue-name">जैसवाल लॉन</h3>
-                            <p class="venue-address">सालबर्डी रोड, मुक्ताईनगर, महाराष्ट्र 425306</p>
-                            <p>आम्ही तुम्हाला आनंदाने आमंत्रित करतो की तुम आमच्या या विशेष दिवशी सहभागी व्हा.</p>
-                        </div>
-                        
-                        <p style="margin-top: 20px;">
-                            <a href="https://maps.app.goo.gl/Y1h2qofMXRgbvJJf7" 
-                               target="_blank" 
-                               class="rsvp-btn">
-                                📍 
-                                <span class="lang-content active" data-lang="en">View on Map</span>
-                                <span class="lang-content" data-lang="mr">मॅप वर पहा</span>
+                            
+                            <div class="venue-datetime">
+                                <div class="datetime-item">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <span class="datetime-text">
+                                        <span class="lang-content active" data-lang="en">10 February 2026</span>
+                                        <span class="lang-content" data-lang="mr">१० फेब्रुवारी २०२६</span>
+                                    </span>
+                                </div>
+                                <div class="datetime-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span class="datetime-text">
+                                        <span class="lang-content active" data-lang="en">Evening 6:00 PM onwards</span>
+                                        <span class="lang-content" data-lang="mr">संध्याकाळी ६:०० वाजून पुढे</span>
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            <p class="venue-message">
+                                <span class="lang-content active" data-lang="en">We joyfully invite you to join us as we celebrate the beginning of our forever.</span>
+                                <span class="lang-content" data-lang="mr">आम्ही आनंदाने तुम्हाला आमंत्रित करतो की आमच्या कायमच्या जीवनाच्या सुरुवातीच्या उत्सवात सहभागी व्हा.</span>
+                            </p>
+                            
+                            <a href="https://maps.app.goo.gl/Y1h2qofMXRgbvJJf7" target="_blank" class="venue-button">
+                                <i class="fas fa-directions"></i>
+                                <span class="btn-text">
+                                    <span class="lang-content active" data-lang="en">Get Directions</span>
+                                    <span class="lang-content" data-lang="mr">मार्ग मिळवा</span>
+                                </span>
                             </a>
-                        </p>
+                        </div>
                     </div>
-                    <div class="venue-image fade-in-up">
-                        <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                             alt="Wedding Venue" loading="lazy">
+                    
+                    <div class="venue-map animate-card">
+                        <div class="map-placeholder">
+                            <div class="map-overlay">
+                                <i class="fas fa-map-marked-alt"></i>
+                                <span class="map-text">
+                                    <span class="lang-content active" data-lang="en">View on Google Maps</span>
+                                    <span class="lang-content" data-lang="mr">गूगल मॅप्स वर पहा</span>
+                                </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </div>
+            
+            <div class="venue-decor">
+                <div class="decor-element"></div>
+                <div class="decor-element"></div>
+                <div class="decor-element"></div>
             </div>
         </section>
 
         <!-- LOVE STORY SECTION -->
-        <section class="story" id="story">
-            <div class="container">
-                <div class="section-title fade-in-up">
-                    <!-- English Content -->
-                    <div class="lang-content active" data-lang="en">
-                        <h2>Our Story</h2>
-                        <p>A journey of hearts</p>
+        <section class="story-section" id="story">
+            <div class="section-container">
+                <div class="story-header">
+                    <div class="section-pre-title animate-text">
+                        <span class="lang-content active" data-lang="en">Our Journey</span>
+                        <span class="lang-content" data-lang="mr">आमची सफर</span>
                     </div>
-                    
-                    <!-- Marathi Content -->
-                    <div class="lang-content" data-lang="mr">
-                        <h2>आमची कथा</h2>
-                        <p>हृदयांची सफर</p>
-                    </div>
+                    <h2 class="section-title animate-text">
+                        <span class="lang-content active" data-lang="en">Love Story</span>
+                        <span class="lang-content" data-lang="mr">प्रेमकथा</span>
+                    </h2>
                 </div>
-                <div class="story-content">
-                    <!-- English Content -->
-                    <div class="lang-content active" data-lang="en">
-                        <p class="story-text fade-in-up">
-                            Our journey began with a chance meeting that turned into friendship, friendship that blossomed into love, 
-                            and love that has now become our forever.
-                        </p>
-                        <div class="story-quote fade-in-up gradient-text">
-                            "In your arms, I found my home. In your eyes, I found my peace."
+                
+                <div class="story-timeline">
+                    <div class="timeline-line"></div>
+                    
+                    <div class="timeline-item animate-card">
+                        <div class="timeline-dot">
+                            <i class="fas fa-heart"></i>
                         </div>
-                        <p class="story-text fade-in-up">
-                            With hearts full of joy and gratitude, we are stepping into a new chapter together.
-                        </p>
+                        <div class="timeline-content">
+                            <div class="timeline-year">2020</div>
+                            <h3 class="timeline-title">
+                                <span class="lang-content active" data-lang="en">The First Meeting</span>
+                                <span class="lang-content" data-lang="mr">पहिली भेट</span>
+                            </h3>
+                            <p class="timeline-desc">
+                                <span class="lang-content active" data-lang="en">Our eyes met, and the world stood still for a moment.</span>
+                                <span class="lang-content" data-lang="mr">आमचे डोळे भेटले आणि क्षणभर जग थांबले.</span>
+                            </p>
+                        </div>
                     </div>
                     
-                    <!-- Marathi Content -->
-                    <div class="lang-content" data-lang="mr">
-                        <p class="story-text fade-in-up">
-                            आमची सफर एका योगायोग भेटीने सुरू झाली जी मैत्रीत बदलली, मैत्री जी प्रेमात उमलली, 
-                            आणि प्रेम जे आता आमचे कायमचे झाले आहे.
-                        </p>
-                        <div class="story-quote fade-in-up gradient-text">
-                            "तुझ्या मिठीत, मला माझे घर सापडले. तुझ्या डोळ्यांत, मला माझी शांती सापडली."
+                    <div class="timeline-item animate-card">
+                        <div class="timeline-dot">
+                            <i class="fas fa-heart"></i>
                         </div>
-                        <p class="story-text fade-in-up">
-                            आनंद आणि कृतज्ञतेने भरलेल्या हृदयांसह, आम्ही एकत्रितपणे एक नवीन अध्याय सुरू करत आहोत.
-                        </p>
+                        <div class="timeline-content">
+                            <div class="timeline-year">2022</div>
+                            <h3 class="timeline-title">
+                                <span class="lang-content active" data-lang="en">Growing Together</span>
+                                <span class="lang-content" data-lang="mr">एकत्र वाढताना</span>
+                            </h3>
+                            <p class="timeline-desc">
+                                <span class="lang-content active" data-lang="en">From friendship to love, our bond grew stronger each day.</span>
+                                <span class="lang-content" data-lang="mr">मैत्रीतून प्रेमात, आमचा बंध दररोज मजबूत होत गेला.</span>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item animate-card">
+                        <div class="timeline-dot">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-year">2024</div>
+                            <h3 class="timeline-title">
+                                <span class="lang-content active" data-lang="en">The Proposal</span>
+                                <span class="lang-content" data-lang="mr">प्रस्ताव</span>
+                            </h3>
+                            <p class="timeline-desc">
+                                <span class="lang-content active" data-lang="en">Under the stars, we promised forever to each other.</span>
+                                <span class="lang-content" data-lang="mr">ताऱ्यांखाली, आम्ही एकमेकांना कायमचे वचन दिले.</span>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item animate-card">
+                        <div class="timeline-dot">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-year">2026</div>
+                            <h3 class="timeline-title">
+                                <span class="lang-content active" data-lang="en">The Beginning</span>
+                                <span class="lang-content" data-lang="mr">सुरुवात</span>
+                            </h3>
+                            <p class="timeline-desc">
+                                <span class="lang-content active" data-lang="en">Our journey as husband and wife begins.</span>
+                                <span class="lang-content" data-lang="mr">पती-पत्नी म्हणून आमची सफर सुरू होते.</span>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- GALLERY SECTION -->
-        <section class="gallery" id="gallery">
-            <div class="container">
-                <div class="section-title fade-in-up">
-                    <!-- English Content -->
-                    <div class="lang-content active" data-lang="en">
-                        <h2>Memories</h2>
-                        <p>Precious moments</p>
+        <section class="gallery-section" id="gallery">
+            <div class="section-container">
+                <div class="gallery-header">
+                    <div class="section-pre-title animate-text">
+                        <span class="lang-content active" data-lang="en">Memories</span>
+                        <span class="lang-content" data-lang="mr">आठवणी</span>
                     </div>
-                    
-                    <!-- Marathi Content -->
-                    <div class="lang-content" data-lang="mr">
-                        <h2>आठवणी</h2>
-                        <p>किमती क्षण</p>
-                    </div>
+                    <h2 class="section-title animate-text">
+                        <span class="lang-content active" data-lang="en">Our Moments</span>
+                        <span class="lang-content" data-lang="mr">आमचे क्षण</span>
+                    </h2>
                 </div>
                 
                 <div class="gallery-grid">
-                    <div class="gallery-item fade-in-up">
-                        <img src="./Image/IMG1.jpg" alt="Engagement Day" loading="lazy">
+                    <div class="gallery-item animate-card">
+                        <div class="gallery-image" style="background-image: url('./Image/IMG1.jpg')">
+                            <div class="gallery-overlay">
+                                <div class="gallery-caption">
+                                    <span class="lang-content active" data-lang="en">First Date</span>
+                                    <span class="lang-content" data-lang="mr">पहिली भेट</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="gallery-item fade-in-up">
-                        <img src="Image/IMG2.jpg" alt="Together Forever" loading="lazy">
+                    
+                    <div class="gallery-item animate-card">
+                        <div class="gallery-image" style="background-image: url('./Image/IMG2.jpg')">
+                            <div class="gallery-overlay">
+                                <div class="gallery-caption">
+                                    <span class="lang-content active" data-lang="en">Engagement Day</span>
+                                    <span class="lang-content" data-lang="mr">सगाईचा दिवस</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="gallery-item fade-in-up">
-                        <img src="Image/IMG3.jpg" alt="Celebration" loading="lazy">
+                    
+                    <div class="gallery-item animate-card">
+                        <div class="gallery-image" style="background-image: url('./Image/IMG3.jpg')">
+                            <div class="gallery-overlay">
+                                <div class="gallery-caption">
+                                    <span class="lang-content active" data-lang="en">Together Always</span>
+                                    <span class="lang-content" data-lang="mr">नेहमी एकत्र</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="gallery-item fade-in-up">
-                        <img src="Image/IMG4.jpg" alt="Special Moments" loading="lazy">
+                    
+                    <div class="gallery-item animate-card">
+                        <div class="gallery-image" style="background-image: url('./Image/IMG4.jpg')">
+                            <div class="gallery-overlay">
+                                <div class="gallery-caption">
+                                    <span class="lang-content active" data-lang="en">Special Moments</span>
+                                    <span class="lang-content" data-lang="mr">विशेष क्षण</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- RSVP SECTION -->
-        <section class="rsvp" id="rsvp">
-            <div class="container">
-                <div class="rsvp-container">
-                    <div class="section-title fade-in-up">
-                        <!-- English Content -->
-                        <div class="lang-content active" data-lang="en">
-                            <h2 class="rsvp-title">RSVP</h2>
-                            <p class="rsvp-text">
-                                Your presence would mean the world to us. 
-                                Please confirm your attendance below.
-                            </p>
-                        </div>
-                        
-                        <!-- Marathi Content -->
-                        <div class="lang-content" data-lang="mr">
-                            <h2 class="rsvp-title">उपस्थिती</h2>
-                            <p class="rsvp-text">
-                                तुमची उपस्थिती आमच्यासाठी जगातील सर्वात मोठी गोष्ट असेल. 
-                                कृपया खालील बटणावर क्लिक करून उपस्थिती निश्चित करा.
-                            </p>
-                        </div>
+        <section class="rsvp-section" id="rsvp">
+            <div class="section-container">
+                <div class="rsvp-header">
+                    <div class="section-pre-title animate-text">
+                        <span class="lang-content active" data-lang="en">Your Presence</span>
+                        <span class="lang-content" data-lang="mr">तुमची उपस्थिती</span>
+                    </div>
+                    <h2 class="section-title animate-text">
+                        <span class="lang-content active" data-lang="en">RSVP</span>
+                        <span class="lang-content" data-lang="mr">उपस्थिती</span>
+                    </h2>
+                </div>
+                
+                <div class="rsvp-content animate-card">
+                    <div class="rsvp-message">
+                        <p class="message-text">
+                            <span class="lang-content active" data-lang="en">Your presence would mean the world to us as we celebrate our special day.</span>
+                            <span class="lang-content" data-lang="mr">आमच्या विशेष दिवशी साजरा करताना तुमची उपस्थिती आमच्यासाठी जगातील सर्वात मोठी गोष्ट असेल.</span>
+                        </p>
                     </div>
                     
-                    <a href="https://wa.me/918522007111?text=%E0%A4%B9%E0%A5%8B%20%E0%A4%A8%E0%A4%95%E0%A5%8D%E0%A4%95%E0%A5%80%E0%A4%9A%2C%20%E0%A4%AE%E0%A5%80%20%E0%A5%A7%E0%A5%A6%20%E0%A4%AB%E0%A5%87%E0%A4%AC%E0%A5%8D%E0%A4%B0%E0%A5%81%E0%A4%B5%E0%A4%BE%E0%A4%B0%E0%A5%80%20%E0%A5%A8%E0%A5%A6%E0%A5%A8%E0%A5%AC%20%E0%A4%B0%E0%A5%8B%E0%A4%9C%E0%A5%80%20%E0%A4%A4%E0%A5%81%E0%A4%AE%E0%A5%8D%E0%A4%B9%E0%A4%BE%E0%A4%9A%E0%A5%8D%E0%A4%AF%E0%A4%BE%20%E0%A4%B2%E0%A4%97%E0%A5%8D%E0%A4%A8%E0%A4%BE%E0%A4%B2%E0%A4%BE%20%E0%A4%89%E0%A4%AA%E0%A4%B8%E0%A5%8D%E0%A4%A5%E0%A4%BF%E0%A4%A4%20%E0%A4%B0%E0%A4%BE%E0%A4%B9%E0%A5%80%E0%A4%A8%20%21%21%21%21%21" 
-                       target="_blank" 
-                       class="rsvp-btn pulse fade-in-up">
-                        ❤️ 
-                        <span class="lang-content active" data-lang="en">Confirm Attendance</span>
-                        <span class="lang-content" data-lang="mr">उपस्थिती निश्चित करा</span>
-                    </a>
+                    <div class="rsvp-actions">
+                        <a href="https://wa.me/918522007111?text=Hello,%20I%20will%20attend%20the%20wedding%20on%20February%2010,%202026!" 
+                           target="_blank" 
+                           class="rsvp-button confirm-btn">
+                            <i class="fab fa-whatsapp"></i>
+                            <span class="btn-text">
+                                <span class="lang-content active" data-lang="en">Confirm via WhatsApp</span>
+                                <span class="lang-content" data-lang="mr">व्हाट्सएप द्वारे निश्चित करा</span>
+                            </span>
+                        </a>
+                        
+                        <button class="rsvp-button decline-btn">
+                            <i class="fas fa-heart-broken"></i>
+                            <span class="btn-text">
+                                <span class="lang-content active" data-lang="en">Regretfully Decline</span>
+                                <span class="lang-content" data-lang="mr">दुःखाने नकार</span>
+                            </span>
+                        </button>
+                    </div>
                     
-                    <p style="margin-top: 15px; font-size: 0.85rem; opacity: 0.8;">
-                        <span class="lang-content active" data-lang="en">
-                            (Will open WhatsApp with a pre-filled message)
-                        </span>
-                        <span class="lang-content" data-lang="mr">
-                            (पूर्व-भरलेल्या संदेशासह व्हाट्सएप उघडेल)
-                        </span>
-                    </p>
+                    <div class="rsvp-note">
+                        <p>
+                            <span class="lang-content active" data-lang="en">Please RSVP by February 1, 2026</span>
+                            <span class="lang-content" data-lang="mr">कृपया १ फेब्रुवारी २०२६ पर्यंत उपस्थिती निश्चित करा</span>
+                        </p>
+                    </div>
                 </div>
+            </div>
+            
+            <div class="rsvp-hearts">
+                <div class="heart-animation"></div>
+                <div class="heart-animation"></div>
+                <div class="heart-animation"></div>
             </div>
         </section>
 
         <!-- FOOTER -->
-        <footer>
-            <div class="container">
+        <footer class="main-footer">
+            <div class="section-container">
                 <div class="footer-content">
-                    <!-- English Content -->
-                    <div class="lang-content active" data-lang="en">
-                        <p class="footer-text">With love,</p>
-                        <h2 class="names-font gradient-text">Abhishek & Vaishnavi</h2>
-                        <p>We can't wait to celebrate with you!</p>
+                    <div class="footer-logo">
+                        <span class="logo-text">A&V</span>
+                        <div class="logo-heart"><i class="fas fa-heart"></i></div>
                     </div>
                     
-                    <!-- Marathi Content -->
-                    <div class="lang-content" data-lang="mr">
-                        <p class="footer-text">प्रेमासह,</p>
-                        <h2 class="names-font gradient-text">अभिषेक आणि वैष्णवी</h2>
-                        <p>आम्ही तुमच्यासोबत साजरा करण्यासाठी प्रतीक्षा करू शकत नाही!</p>
+                    <div class="footer-message">
+                        <h3 class="footer-title">
+                            <span class="lang-content active" data-lang="en">Thank You</span>
+                            <span class="lang-content" data-lang="mr">धन्यवाद</span>
+                        </h3>
+                        <p class="footer-text">
+                            <span class="lang-content active" data-lang="en">For being a part of our journey. See you on our special day!</span>
+                            <span class="lang-content" data-lang="mr">आमच्या सफरेचा भाग असल्याबद्दल. आमच्या विशेष दिवशी भेटूया!</span>
+                        </p>
                     </div>
                     
-                    <p style="margin-top: 20px; font-size: 0.9rem; opacity: 0.8;">
-                        <span class="lang-content active" data-lang="en">
-                            Made with <span class="heart">❤️</span> for our special day
-                        </span>
-                        <span class="lang-content" data-lang="mr">
-                            आमच्या विशेष दिवसासाठी <span class="heart">❤️</span> सह बनवले
-                        </span>
-                    </p>
+                    <div class="footer-names">
+                        <h2 class="names-title">Abhishek & Vaishnavi</h2>
+                        <div class="footer-date">10 • 02 • 2026</div>
+                    </div>
+                    
+                    <div class="footer-social">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                    
+                    <div class="footer-copyright">
+                        <p>
+                            <span class="lang-content active" data-lang="en">Made with <i class="fas fa-heart"></i> for our special day</span>
+                            <span class="lang-content" data-lang="mr">आमच्या विशेष दिवसासाठी <i class="fas fa-heart"></i> सह बनवले</span>
+                        </p>
+                    </div>
                 </div>
             </div>
         </footer>
     </div>
-    
+
+    <!-- Scroll to Top -->
+    <button class="scroll-top" id="scrollTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Scripts -->
     <script src="./JS/script.js"></script>
 </body>
 </html>

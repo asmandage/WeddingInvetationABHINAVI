@@ -1,118 +1,58 @@
 // ============================================
-// PAGE LOADER FUNCTIONALITY
+// INITIALIZATION
 // ============================================
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize all features
+    // Initialize all components
     initLoader();
+    initNavigation();
     initLanguage();
     initCountdown();
-    initScrollTop();
     initScrollAnimations();
-    initAdvancedAnimations();
-    initSmoothScrolling();
-    initScrollIndicator();
-    initImageLoadEffects();
-    initParallaxEffect();
+    initScrollProgress();
+    initScrollTop();
+    initGallery();
+    initRSVP();
+    initTimeline();
     initHoverEffects();
-    addCSSAnimation();
+    
+    // Start animations after page load
+    setTimeout(initStaggeredAnimations, 500);
 });
 
+// ============================================
+// PAGE LOADER
+// ============================================
 function initLoader() {
     const loader = document.getElementById('page-loader');
     const mainContent = document.getElementById('main-content');
-    const progressBar = document.querySelector('.progress-bar');
-    const langButtons = document.querySelectorAll('.lang-btn');
     
-    // Simulate progress for better UX
-    let progress = 0;
-    const progressInterval = setInterval(() => {
-        progress += Math.random() * 15;
-        if (progress > 90) {
-            progress = 90;
-        }
-        progressBar.style.width = `${progress}%`;
-    }, 200);
-
-    // Handle page load
+    // Hide loader and show content when page is loaded
     window.addEventListener('load', function() {
-        // Complete progress bar
-        clearInterval(progressInterval);
-        progressBar.style.width = '100%';
-        
-        // Add a small delay for smooth transition
         setTimeout(() => {
-            // Hide loader
             loader.classList.add('fade-out');
-            
-            // Show main content
             mainContent.classList.add('loaded');
-            
-            // Start staggered animations after loader
-            setTimeout(() => {
-                initStaggeredAnimations();
-                addRSVPpulse();
-            }, 500);
             
             // Remove loader from DOM after animation
             setTimeout(() => {
                 loader.style.display = 'none';
-            }, 500);
-            
-        }, 300);
-    });
-
-    // Handle language toggle for loader text
-    function updateLoaderText(lang) {
-        const loaderTexts = document.querySelectorAll('.loader-text span');
-        loaderTexts.forEach(text => {
-            text.classList.toggle('active', text.classList.contains('lang-content') && 
-                text.dataset.lang === lang);
-        });
-    }
-
-    // Initialize loader text language
-    let currentLang = localStorage.getItem('weddingLang') || 'en';
-    updateLoaderText(currentLang);
-    
-    // Update loader text when language changes
-    langButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const lang = btn.dataset.lang;
-            updateLoaderText(lang);
-        });
+                // Trigger confetti celebration
+                createConfetti();
+            }, 1000);
+        }, 1500);
     });
 }
 
 // ============================================
-// ADVANCED ANIMATIONS INITIALIZATION
+// NAVIGATION
 // ============================================
-function initAdvancedAnimations() {
-    // Add hover effect to all interactive elements
-    const interactiveElements = document.querySelectorAll(
-        'button, a, .gallery-item, .family-photo-container, .venue-image'
-    );
+function initNavigation() {
+    const navLinks = document.querySelectorAll('.nav-link');
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinksContainer = document.querySelector('.nav-links');
     
-    interactiveElements.forEach(el => {
-        el.style.cursor = 'pointer';
-        
-        // Add touch feedback for mobile
-        el.addEventListener('touchstart', function() {
-            this.style.transform = 'scale(0.98)';
-        });
-        
-        el.addEventListener('touchend', function() {
-            this.style.transform = 'scale(1)';
-        });
-    });
-}
-
-// ============================================
-// SMOOTH SCROLLING WITH EASING
-// ============================================
-function initSmoothScrolling() {
-    // Smooth scroll for all anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
+    // Smooth scrolling for navigation links
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
             e.preventDefault();
             
             const targetId = this.getAttribute('href');
@@ -120,6 +60,11 @@ function initSmoothScrolling() {
             
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
+                // Update active nav link
+                navLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Scroll to section
                 const headerOffset = 80;
                 const elementPosition = targetElement.offsetTop;
                 const offsetPosition = elementPosition - headerOffset;
@@ -129,150 +74,71 @@ function initSmoothScrolling() {
                     behavior: 'smooth'
                 });
                 
-                // Add active class to scroll indicator
-                updateScrollIndicator(targetId);
-            }
-        });
-    });
-}
-
-// ============================================
-// SCROLL INDICATOR
-// ============================================
-function initScrollIndicator() {
-    // Create scroll indicator dots if not already in HTML
-    if (!document.querySelector('.scroll-indicator .scroll-dot')) {
-        const sections = ['home', 'family-section', 'countdown-section', 'venue', 'story', 'gallery', 'rsvp'];
-        const indicator = document.querySelector('.scroll-indicator');
-        
-        sections.forEach(section => {
-            const dot = document.createElement('div');
-            dot.className = 'scroll-dot';
-            dot.dataset.section = section;
-            dot.addEventListener('click', () => {
-                document.getElementById(section).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-            indicator.appendChild(dot);
-        });
-    }
-    
-    // Update active dot on scroll
-    window.addEventListener('scroll', updateScrollIndicator);
-}
-
-function updateScrollIndicator(sectionId = null) {
-    const dots = document.querySelectorAll('.scroll-dot');
-    const sections = ['home', 'family-section', 'countdown-section', 'venue', 'story', 'gallery', 'rsvp'];
-    
-    let currentSection = sectionId ? sectionId.replace('#', '') : null;
-    
-    if (!currentSection) {
-        // Determine current section based on scroll position
-        const scrollPosition = window.scrollY + 100;
-        
-        sections.forEach(section => {
-            const element = document.getElementById(section);
-            if (element) {
-                const sectionTop = element.offsetTop;
-                const sectionBottom = sectionTop + element.offsetHeight;
-                
-                if (scrollPosition >= sectionTop && scrollPosition <= sectionBottom) {
-                    currentSection = section;
+                // Close mobile menu if open
+                if (window.innerWidth <= 768) {
+                    navLinksContainer.style.display = 'none';
                 }
             }
         });
+    });
+    
+    // Mobile menu toggle
+    if (menuToggle) {
+        menuToggle.addEventListener('click', function() {
+            const isVisible = navLinksContainer.style.display === 'flex';
+            navLinksContainer.style.display = isVisible ? 'none' : 'flex';
+            
+            if (!isVisible) {
+                navLinksContainer.style.flexDirection = 'column';
+                navLinksContainer.style.position = 'absolute';
+                navLinksContainer.style.top = '100%';
+                navLinksContainer.style.left = '0';
+                navLinksContainer.style.width = '100%';
+                navLinksContainer.style.background = 'rgba(255, 255, 255, 0.98)';
+                navLinksContainer.style.backdropFilter = 'blur(10px)';
+                navLinksContainer.style.padding = '1rem';
+                navLinksContainer.style.boxShadow = 'var(--shadow-md)';
+                navLinksContainer.style.zIndex = '1000';
+            }
+        });
     }
     
-    dots.forEach(dot => {
-        dot.classList.remove('active');
-        if (dot.dataset.section === currentSection) {
-            dot.classList.add('active');
+    // Update active nav link on scroll
+    window.addEventListener('scroll', updateActiveNavLink);
+}
+
+function updateActiveNavLink() {
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    let currentSection = '';
+    const scrollPosition = window.scrollY + 100;
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        
+        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+            currentSection = section.getAttribute('id');
+        }
+    });
+    
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${currentSection}`) {
+            link.classList.add('active');
         }
     });
 }
 
 // ============================================
-// IMAGE LOAD EFFECTS
-// ============================================
-function initImageLoadEffects() {
-    const images = document.querySelectorAll('img');
-    
-    images.forEach(img => {
-        if (img.complete) {
-            img.style.opacity = '1';
-            img.style.transform = 'scale(1)';
-        } else {
-            img.addEventListener('load', function() {
-                this.style.opacity = '1';
-                this.style.transform = 'scale(1)';
-                
-                // Trigger parent animation
-                const parent = this.closest('.gallery-item, .family-photo-container, .venue-image');
-                if (parent) {
-                    parent.classList.add('visible');
-                }
-            });
-        }
-    });
-}
-
-// ============================================
-// STAGGERED ANIMATIONS
-// ============================================
-function initStaggeredAnimations() {
-    // Animate elements with delay
-    const elements = document.querySelectorAll('.fade-in-up, .gallery-item, .family-description, .story-text');
-    
-    elements.forEach((el, index) => {
-        setTimeout(() => {
-            el.style.opacity = '1';
-            el.style.transform = 'translateY(0)';
-            el.classList.add('visible');
-        }, index * 100);
-    });
-    
-    // Animate countdown numbers
-    const countdownNumbers = document.querySelectorAll('.countdown-number');
-    countdownNumbers.forEach((num, index) => {
-        setTimeout(() => {
-            num.style.opacity = '1';
-            num.style.transform = 'translateY(0)';
-        }, 300 + (index * 100));
-    });
-    
-    // Animate sections
-    const sections = document.querySelectorAll('section');
-    sections.forEach((section, index) => {
-        setTimeout(() => {
-            section.classList.add('visible');
-        }, 500 + (index * 200));
-    });
-}
-
-// ============================================
-// PARALLAX EFFECT
-// ============================================
-function initParallaxEffect() {
-    window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        const parallaxElements = document.querySelectorAll('.hero, .family, .venue');
-        
-        parallaxElements.forEach((element, index) => {
-            const rate = scrolled * (0.3 + (index * 0.05));
-            element.style.transform = `translateY(${rate}px)`;
-        });
-    });
-}
-
-// ============================================
-// ENHANCED LANGUAGE TOGGLE
+// LANGUAGE SWITCHER
 // ============================================
 function initLanguage() {
     const langButtons = document.querySelectorAll('.lang-btn');
     const allLangContents = document.querySelectorAll('.lang-content');
     
+    // Load saved language or default to English
     let currentLang = localStorage.getItem('weddingLang') || 'en';
     
     function switchLanguage(lang) {
@@ -299,25 +165,29 @@ function initLanguage() {
             }
         });
         
+        // Update buttons
         langButtons.forEach(btn => {
             btn.classList.toggle('active', btn.dataset.lang === lang);
         });
         
+        // Save preference
         localStorage.setItem('weddingLang', lang);
         currentLang = lang;
     }
     
+    // Add click handlers
     langButtons.forEach(btn => {
         btn.addEventListener('click', () => {
             switchLanguage(btn.dataset.lang);
         });
     });
     
+    // Initialize with saved language
     switchLanguage(currentLang);
 }
 
 // ============================================
-// ENHANCED COUNTDOWN WITH ANIMATIONS
+// COUNTDOWN TIMER
 // ============================================
 function initCountdown() {
     const weddingDate = new Date("Feb 10, 2026 00:00:00").getTime();
@@ -339,10 +209,19 @@ function initCountdown() {
         const diff = weddingDate - now;
         
         if (diff < 0) {
-            document.getElementById("countdown").innerHTML = 
-                `<div class="countdown-complete" style="color: var(--color-primary); font-size: 1.8rem; text-align: center; padding: 30px; animation: celebrate 1s ease;">
-                    🎉 We Are Married! 🎉
+            // Wedding day has arrived!
+            document.querySelector('.countdown-timer').innerHTML = 
+                `<div class="wedding-day-message" style="text-align: center; padding: var(--spacing-xl);">
+                    <h3 style="color: var(--color-accent); font-size: 2.5rem; margin-bottom: var(--spacing-md);">
+                        🎉 Today's the Day! 🎉
+                    </h3>
+                    <p style="color: var(--color-light); font-size: 1.125rem;">
+                        We're getting married right now!
+                    </p>
                 </div>`;
+            
+            // Create celebratory confetti
+            createConfetti();
             return;
         }
         
@@ -351,28 +230,28 @@ function initCountdown() {
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((diff % (1000 * 60)) / 1000);
         
-        // Update with animation if value changed
-        updateWithAnimation(daysEl, days.toString().padStart(2, '0'), oldValues.days);
-        updateWithAnimation(hoursEl, hours.toString().padStart(2, '0'), oldValues.hours);
-        updateWithAnimation(minutesEl, minutes.toString().padStart(2, '0'), oldValues.minutes);
-        updateWithAnimation(secondsEl, seconds.toString().padStart(2, '0'), oldValues.seconds);
+        // Update with flip animation
+        updateWithFlip(daysEl, days.toString().padStart(2, '0'), oldValues.days);
+        updateWithFlip(hoursEl, hours.toString().padStart(2, '0'), oldValues.hours);
+        updateWithFlip(minutesEl, minutes.toString().padStart(2, '0'), oldValues.minutes);
+        updateWithFlip(secondsEl, seconds.toString().padStart(2, '0'), oldValues.seconds);
         
-        // Store new values
-        oldValues = { 
-            days: days.toString().padStart(2, '0'), 
-            hours: hours.toString().padStart(2, '0'), 
-            minutes: minutes.toString().padStart(2, '0'), 
-            seconds: seconds.toString().padStart(2, '0') 
+        // Store old values
+        oldValues = {
+            days: days.toString().padStart(2, '0'),
+            hours: hours.toString().padStart(2, '0'),
+            minutes: minutes.toString().padStart(2, '0'),
+            seconds: seconds.toString().padStart(2, '0')
         };
     }
     
-    function updateWithAnimation(element, newValue, oldValue) {
+    function updateWithFlip(element, newValue, oldValue) {
         if (element.textContent !== newValue) {
-            element.classList.add('updated');
+            element.classList.add('flip-animation');
             element.textContent = newValue;
             
             setTimeout(() => {
-                element.classList.remove('updated');
+                element.classList.remove('flip-animation');
             }, 600);
         }
     }
@@ -382,40 +261,6 @@ function initCountdown() {
     
     // Update every second
     setInterval(updateCountdown, 1000);
-}
-
-// ============================================
-// HOVER EFFECTS
-// ============================================
-function initHoverEffects() {
-    // Add tilt effect to cards
-    const cards = document.querySelectorAll('.gallery-item, .family-photo-container, .venue-image');
-    
-    cards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            
-            const rotateY = (x - centerX) / 25;
-            const rotateX = (centerY - y) / 25;
-            
-            card.style.transform = `
-                perspective(1000px) 
-                rotateX(${rotateX}deg) 
-                rotateY(${rotateY}deg) 
-                translateY(-10px) 
-                scale(1.02)
-            `;
-        });
-        
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0) scale(1)';
-        });
-    });
 }
 
 // ============================================
@@ -430,23 +275,38 @@ function initScrollAnimations() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
+                // Add visible class to trigger animations
                 entry.target.classList.add('visible');
                 
-                // Add specific animations for different sections
-                if (entry.target.classList.contains('story-quote')) {
+                // Add specific animations based on element type
+                if (entry.target.classList.contains('animate-text')) {
                     entry.target.style.animationDelay = '0.3s';
                 }
                 
-                if (entry.target.classList.contains('rsvp-btn')) {
-                    addRSVPpulse();
+                if (entry.target.classList.contains('animate-card')) {
+                    const delay = entry.target.dataset.delay || '0';
+                    entry.target.style.animationDelay = `${delay}s`;
                 }
             }
         });
     }, observerOptions);
     
     // Observe all animated elements
-    document.querySelectorAll('.fade-in-up, section, .story-quote, .gallery-item').forEach(el => {
+    document.querySelectorAll('.animate-text, .animate-card, section').forEach(el => {
         observer.observe(el);
+    });
+}
+
+// ============================================
+// SCROLL PROGRESS
+// ============================================
+function initScrollProgress() {
+    const progressBar = document.querySelector('.progress-bar');
+    
+    window.addEventListener('scroll', () => {
+        const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrolled = (window.scrollY / windowHeight) * 100;
+        progressBar.style.width = `${scrolled}%`;
     });
 }
 
@@ -457,12 +317,10 @@ function initScrollTop() {
     const scrollTopBtn = document.getElementById('scrollTop');
     
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
+        if (window.scrollY > 500) {
             scrollTopBtn.classList.add('visible');
-            scrollTopBtn.style.opacity = '1';
         } else {
             scrollTopBtn.classList.remove('visible');
-            scrollTopBtn.style.opacity = '0';
         }
     });
     
@@ -475,65 +333,221 @@ function initScrollTop() {
 }
 
 // ============================================
-// RSVP PULSE ANIMATION
+// GALLERY
 // ============================================
-function addRSVPpulse() {
-    const rsvpBtn = document.querySelector('.rsvp-btn');
-    if (rsvpBtn && !rsvpBtn.classList.contains('pulse')) {
-        rsvpBtn.classList.add('pulse');
+function initGallery() {
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    
+    // Add hover effect to gallery items
+    galleryItems.forEach(item => {
+        item.addEventListener('mouseenter', () => {
+            item.style.transform = 'scale(1.05)';
+        });
         
-        // Remove pulse after 3 cycles
+        item.addEventListener('mouseleave', () => {
+            item.style.transform = 'scale(1)';
+        });
+    });
+}
+
+// ============================================
+// RSVP
+// ============================================
+function initRSVP() {
+    const confirmBtn = document.querySelector('.confirm-btn');
+    const declineBtn = document.querySelector('.decline-btn');
+    
+    if (confirmBtn) {
+        confirmBtn.addEventListener('click', function(e) {
+            if (!this.getAttribute('href')) {
+                e.preventDefault();
+                showRSVPModal('confirm');
+            }
+        });
+    }
+    
+    if (declineBtn) {
+        declineBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            showRSVPModal('decline');
+        });
+    }
+}
+
+function showRSVPModal(type) {
+    const modal = document.createElement('div');
+    modal.className = 'rsvp-modal';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <h3>${type === 'confirm' ? 'Thank You!' : 'We Understand'}</h3>
+            <p>${type === 'confirm' 
+                ? 'We look forward to celebrating with you!' 
+                : 'Thank you for letting us know. We\'ll miss you!'}</p>
+            <button class="modal-close">Close</button>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    // Close modal
+    modal.querySelector('.modal-close').addEventListener('click', () => {
+        modal.remove();
+    });
+    
+    // Close on background click
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.remove();
+        }
+    });
+}
+
+// ============================================
+// TIMELINE
+// ============================================
+function initTimeline() {
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    
+    // Add staggered animation to timeline items
+    timelineItems.forEach((item, index) => {
+        item.style.transitionDelay = `${index * 0.2}s`;
+    });
+}
+
+// ============================================
+// HOVER EFFECTS
+// ============================================
+function initHoverEffects() {
+    // Add hover effects to cards
+    const cards = document.querySelectorAll('.family-card, .venue-info, .timeline-content');
+    
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            card.style.transform = 'translateY(-8px)';
+            card.style.boxShadow = 'var(--shadow-xl)';
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'translateY(0)';
+            card.style.boxShadow = 'var(--shadow-md)';
+        });
+    });
+}
+
+// ============================================
+// STAGGERED ANIMATIONS
+// ============================================
+function initStaggeredAnimations() {
+    // Animate hero elements with delay
+    const heroElements = document.querySelectorAll('.hero-section .animate-text');
+    heroElements.forEach((el, index) => {
         setTimeout(() => {
-            rsvpBtn.classList.remove('pulse');
-        }, 6000);
+            el.classList.add('visible');
+        }, 300 + (index * 200));
+    });
+    
+    // Animate section headers
+    const sectionHeaders = document.querySelectorAll('.section-header .animate-text');
+    sectionHeaders.forEach((el, index) => {
+        setTimeout(() => {
+            el.classList.add('visible');
+        }, 500 + (index * 100));
+    });
+}
+
+// ============================================
+// CONFETTI EFFECT
+// ============================================
+function createConfetti() {
+    const colors = ['#c46bae', '#d4af37', '#ffffff', '#9e4c8a'];
+    const confettiCount = 150;
+    
+    for (let i = 0; i < confettiCount; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        
+        // Random properties
+        const size = Math.random() * 10 + 5;
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        const left = Math.random() * 100;
+        const animationDelay = Math.random() * 3;
+        const animationDuration = Math.random() * 2 + 2;
+        
+        // Apply styles
+        confetti.style.width = `${size}px`;
+        confetti.style.height = `${size}px`;
+        confetti.style.background = color;
+        confetti.style.left = `${left}vw`;
+        confetti.style.animationDelay = `${animationDelay}s`;
+        confetti.style.animationDuration = `${animationDuration}s`;
+        
+        // Add to document
+        document.body.appendChild(confetti);
+        
+        // Remove after animation
+        setTimeout(() => {
+            confetti.remove();
+        }, (animationDelay + animationDuration) * 1000);
     }
 }
 
 // ============================================
-// ADD CELEBRATION ANIMATION
+// WINDOW RESIZE HANDLER
 // ============================================
-function addCSSAnimation() {
-    // Check if style already exists
-    if (document.getElementById('celebration-animations')) return;
-    
-    const style = document.createElement('style');
-    style.id = 'celebration-animations';
-    style.textContent = `
-        @keyframes celebrate {
-            0% { transform: scale(0.5); opacity: 0; }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); opacity: 1; }
-        }
-        
-        @keyframes confetti {
-            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
-        }
-        
-        .countdown-complete {
-            animation: celebrate 1s ease !important;
-        }
-    `;
-    document.head.appendChild(style);
-}
+window.addEventListener('resize', function() {
+    // Update navigation for mobile/desktop
+    const navLinks = document.querySelector('.nav-links');
+    if (window.innerWidth > 768) {
+        navLinks.style.display = 'flex';
+        navLinks.style.position = 'static';
+        navLinks.style.flexDirection = 'row';
+        navLinks.style.background = 'transparent';
+        navLinks.style.padding = '0';
+    } else {
+        navLinks.style.display = 'none';
+    }
+});
 
 // ============================================
-// LAZY LOAD IMAGES
+// ADDITIONAL ANIMATION FUNCTIONS
 // ============================================
-if ('IntersectionObserver' in window) {
-    const imageObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                if (img.dataset.src) {
-                    img.src = img.dataset.src;
-                }
-                imageObserver.unobserve(img);
-            }
-        });
-    });
-    
-    document.querySelectorAll('img[data-src]').forEach(img => {
-        imageObserver.observe(img);
+function createParticles(element, count = 20) {
+    for (let i = 0; i < count; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        
+        const size = Math.random() * 8 + 2;
+        const left = Math.random() * 100;
+        const animationDelay = Math.random() * 2;
+        
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.left = `${left}%`;
+        particle.style.animationDelay = `${animationDelay}s`;
+        
+        element.appendChild(particle);
+        
+        setTimeout(() => {
+            particle.remove();
+        }, 4000);
+    }
+}
+
+// Add particles to important elements
+document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('rsvp-button') || 
+        e.target.closest('.rsvp-button')) {
+        createParticles(e.target.closest('.rsvp-button'), 30);
+    }
+});
+
+// Initialize floating elements
+function initFloatingElements() {
+    const floatingEls = document.querySelectorAll('.floating-element, .floating-ring');
+    floatingEls.forEach((el, index) => {
+        el.style.animationDelay = `${index * 0.5}s`;
     });
 }
+
+// Call initialization functions
+initFloatingElements();
