@@ -173,7 +173,7 @@
         .hero {
             min-height: 100vh;
             background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)),
-                        url('../Image/DSC02271\ copy.jpg') 
+                        url('../Image/ImgBG.jpg') 
                         center/cover no-repeat;
             display: flex;
             justify-content: center;
