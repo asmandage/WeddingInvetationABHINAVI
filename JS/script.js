@@ -1,3 +1,80 @@
+// ============================================
+// PAGE LOADER FUNCTIONALITY
+// ============================================
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // Initialize loader
+    initLoader();
+    
+    // Rest of your existing initialization code
+    initLanguage();
+    initCountdown();
+    initScrollTop();
+    initScrollAnimations();
+});
+
+function initLoader() {
+    const loader = document.getElementById('page-loader');
+    const mainContent = document.getElementById('main-content');
+    const progressBar = document.querySelector('.progress-bar');
+    const langButtons = document.querySelectorAll('.lang-btn');
+    
+    // Simulate progress for better UX
+    let progress = 0;
+    const progressInterval = setInterval(() => {
+        progress += Math.random() * 15;
+        if (progress > 90) {
+            progress = 90;
+        }
+        progressBar.style.width = `${progress}%`;
+    }, 200);
+
+    // Handle page load
+    window.addEventListener('load', function() {
+        // Complete progress bar
+        clearInterval(progressInterval);
+        progressBar.style.width = '100%';
+        
+        // Add a small delay for smooth transition
+        setTimeout(() => {
+            // Hide loader
+            loader.classList.add('fade-out');
+            
+            // Show main content
+            mainContent.classList.add('loaded');
+            
+            // Remove loader from DOM after animation
+            setTimeout(() => {
+                loader.style.display = 'none';
+            }, 500);
+            
+        }, 300);
+    });
+
+    // Handle language toggle for loader text
+    function updateLoaderText(lang) {
+        const loaderTexts = document.querySelectorAll('.loader-text span');
+        loaderTexts.forEach(text => {
+            text.classList.toggle('active', text.classList.contains('lang-content') && 
+                text.dataset.lang === lang);
+        });
+    }
+
+    // Initialize loader text language
+    let currentLang = localStorage.getItem('weddingLang') || 'en';
+    updateLoaderText(currentLang);
+    
+    // Update loader text when language changes
+    langButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const lang = btn.dataset.lang;
+            updateLoaderText(lang);
+        });
+    });
+}
+
+
+        
         // ============================================
         // SIMPLE LANGUAGE TOGGLE
         // ============================================

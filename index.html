@@ -10,15 +10,49 @@
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/style.css">
+    
+    <!-- Loader CSS (Add this line) -->
+    <link rel="stylesheet" href="./css/loader.css">
 </head>
 
 <body>
-    <!-- Language Toggle -->
-    <div class="language-toggle">
-        <button class="lang-btn active" data-lang="en">English</button>
-        <button class="lang-btn" data-lang="mr">मराठी</button>
+    <!-- ============================================
+           PAGE LOADER
+        ============================================ -->
+    <div id="page-loader" class="page-loader">
+        <div class="loader-container">
+            <!-- Heart Pulse Animation -->
+            <div class="heart-loader">
+                <div class="heart-pulse"></div>
+                <div class="heart-pulse heart-pulse-2"></div>
+                <div class="heart-pulse heart-pulse-3"></div>
+                <div class="heart-core">
+                    <i class="fas fa-heart"></i>
+                </div>
+            </div>
+            
+            <!-- Loading Text -->
+            <div class="loader-text">
+                <span class="lang-content active" data-lang="en">Loading Our Special Day...</span>
+                <span class="lang-content" data-lang="mr">आमचा विशेष दिवस लोड होत आहे...</span>
+            </div>
+            
+            <!-- Progress Bar -->
+            <div class="loader-progress">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
     </div>
+
+    <!-- Main Content (hidden until loader finishes) -->
+    <div id="main-content" class="main-content">
+        <!-- Rest of your existing HTML remains exactly the same -->
+        <!-- Language Toggle -->
+        <div class="language-toggle">
+            <button class="lang-btn active" data-lang="en">English</button>
+            <button class="lang-btn" data-lang="mr">मराठी</button>
+        </div>
 
     <!-- Scroll to Top Button -->
     <button class="scroll-top" id="scrollTop">

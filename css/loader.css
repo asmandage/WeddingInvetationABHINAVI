@@ -1,0 +1,205 @@
+/* ============================================
+           PAGE LOADER STYLES
+        ============================================ */
+
+/* Main Loader Container */
+.page-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #f8f0f5 0%, #ffffff 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 1;
+    visibility: visible;
+    transition: all 0.5s ease-out;
+}
+
+.page-loader.fade-out {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Loader Container */
+.loader-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    max-width: 90%;
+}
+
+/* Heart Loader Styles */
+.heart-loader {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin-bottom: 30px;
+}
+
+.heart-core {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3.5rem;
+    color: #d46ba6;
+    z-index: 10;
+    animation: heartbeat 1.2s ease-in-out infinite;
+}
+
+.heart-pulse {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    border: 2px solid rgba(212, 107, 166, 0.3);
+    border-radius: 50%;
+    animation: pulse 2s ease-out infinite;
+}
+
+.heart-pulse-2 {
+    animation-delay: 0.4s;
+}
+
+.heart-pulse-3 {
+    animation-delay: 0.8s;
+}
+
+/* Loader Text */
+.loader-text {
+    margin-bottom: 20px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1rem;
+    color: #2c3e50;
+    font-weight: 500;
+}
+
+.loader-text span {
+    display: none;
+}
+
+.loader-text .active {
+    display: block;
+}
+
+/* Progress Bar */
+.loader-progress {
+    width: 200px;
+    height: 4px;
+    background: rgba(212, 107, 166, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #d46ba6, #d4af37);
+    width: 0%;
+    border-radius: 10px;
+    animation: progress 2s ease-in-out forwards;
+}
+
+/* ============================================
+           LOADER ANIMATIONS
+        ============================================ */
+
+@keyframes heartbeat {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        width: 100%;
+        height: 100%;
+        opacity: 0.8;
+        border-width: 2px;
+    }
+    100% {
+        width: 140%;
+        height: 140%;
+        opacity: 0;
+        border-width: 1px;
+    }
+}
+
+@keyframes progress {
+    0% {
+        width: 0%;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+/* ============================================
+           MAIN CONTENT HIDDEN INITIALLY
+        ============================================ */
+
+.main-content {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease 0.3s, visibility 0.5s ease 0.3s;
+}
+
+.main-content.loaded {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ============================================
+           RESPONSIVE LOADER
+        ============================================ */
+
+@media (max-width: 768px) {
+    .heart-loader {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 25px;
+    }
+    
+    .heart-core {
+        font-size: 2.8rem;
+    }
+    
+    .loader-text {
+        font-size: 1rem;
+    }
+    
+    .loader-progress {
+        width: 180px;
+    }
+}
+
+@media (max-width: 480px) {
+    .heart-loader {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 20px;
+    }
+    
+    .heart-core {
+        font-size: 2.2rem;
+    }
+    
+    .loader-text {
+        font-size: 0.9rem;
+    }
+    
+    .loader-progress {
+        width: 160px;
+    }
+}

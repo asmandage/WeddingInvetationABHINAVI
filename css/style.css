@@ -583,3 +583,18 @@
         .scroll-top:hover {
             background: var(--color-accent);
         }
+
+        /* ============================================
+           LOADER INTEGRATION
+        ============================================ */
+
+/* Hide content initially - Add this at the bottom */
+.main-content {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.main-content.loaded {
+    opacity: 1;
+    visibility: visible;
+}
