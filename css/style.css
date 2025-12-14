@@ -367,7 +367,6 @@ section.visible {
         #ff6b6b, 
         var(--color-primary));
     background-size: 300% 300%;
-    -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: gradientShift 5s ease infinite;
 }
